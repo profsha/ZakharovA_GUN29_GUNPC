@@ -1,36 +1,33 @@
-﻿// See https://aka.ms/new-console-template for more information
-var availableOperators = new [] {"&", "|", "^"};
-Console.WriteLine("Введите первое число");
-if (int.TryParse(Console.ReadLine(), out int a))
+﻿int[] fibonacci = new int[10];
+fibonacci[1] = 1;
+for (var i = 2; i < fibonacci.Length; i++)
 {
-    Console.WriteLine("Введите второе число");
-    if (int.TryParse(Console.ReadLine(), out int b))
-    {
-        Console.WriteLine("Введите оператор & | или ^");
-        var currentOperator = Console.ReadLine();
-        if (availableOperators.Any(x => currentOperator == x.Trim()))
-        {
-            int result;
-            switch (currentOperator)
-            {
-                case "&":
-                    result =  a&b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "|":
-                    result =  a|b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "^":
-                    result =  a^b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-            }
+    fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+}
+Console.WriteLine($"Fibonacci: {String.Join(" ", fibonacci)}");
 
-            return;
-        }
+Console.Write("Second: ");
+for (var i = 2; i <= 20; i+=2)
+{ 
+    Console.Write($"{i} ");
+}
+Console.WriteLine();
+
+Console.WriteLine("Table: ");
+for (int i = 1; i <= 5; i++)
+{
+    for (int j = 1; j <= 10; j++)
+    {
+        Console.Write($"{i*j} ");
     }
+    Console.WriteLine();
 }
 
-Console.WriteLine("Error!"); // Ваш текст
+var password = "qwerty";
+var value = "";
+do
+{
+    value = Console.ReadLine();
+} while (value != password);
+Console.WriteLine("Password correct!");
 
