@@ -1,36 +1,53 @@
-﻿// See https://aka.ms/new-console-template for more information
-var availableOperators = new [] {"&", "|", "^"};
-Console.WriteLine("Введите первое число");
-if (int.TryParse(Console.ReadLine(), out int a))
-{
-    Console.WriteLine("Введите второе число");
-    if (int.TryParse(Console.ReadLine(), out int b))
-    {
-        Console.WriteLine("Введите оператор & | или ^");
-        var currentOperator = Console.ReadLine();
-        if (availableOperators.Any(x => currentOperator == x.Trim()))
-        {
-            int result;
-            switch (currentOperator)
-            {
-                case "&":
-                    result =  a&b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "|":
-                    result =  a|b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "^":
-                    result =  a^b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-            }
+﻿using NetologyCSharp;
 
-            return;
-        }
-    }
-}
+var unit1 = new Unit();
+var unit2 = new Unit("Unit2");
 
-Console.WriteLine("Error!"); // Ваш текст
+Console.WriteLine($"""
+                   Unit1: name = {unit1.Name},
+                    health = {unit1.Health},
+                    damage = {unit1.Damage},
+                    armor = {unit1.Armor},
+                    realHealth = {unit1.GetRealHealth()}
+                   """);
+Console.WriteLine($"""
+                   Unit2: name = {unit2.Name},
+                    health = {unit2.Health},
+                    damage = {unit2.Damage},
+                    armor = {unit2.Armor},
+                    realHealth = {unit2.GetRealHealth()}
+                   """);
+
+unit2.SetDamage(30);
+Console.WriteLine($"""
+                   Unit2 after damage: name = {unit2.Name},
+                    health = {unit2.Health},
+                    damage = {unit2.Damage},
+                    armor = {unit2.Armor},
+                    realHealth = {unit2.GetRealHealth()}
+                   """);
+
+var weapon1 = new Weapon("Weapon1");
+var weapon2 = new Weapon("Weapon2", 3, 20);
+
+Console.WriteLine($"""
+                   Weapon1: name = {weapon1.Name},
+                    durability = {weapon1.Durability},
+                    minDamage = {weapon1.MinDamage},
+                    maxDamage = {weapon1.MaxDamage},
+                   """);
+Console.WriteLine($"""
+                   Weapon2 after damage: name = {weapon2.Name},
+                    durability = {weapon2.Durability},
+                    minDamage = {weapon2.MinDamage},
+                    maxDamage = {weapon2.MaxDamage},
+                   """);
+
+weapon1.SetDamageParams(0, 1);
+Console.WriteLine($"""
+                   Weapon1 after set params: name = {weapon1.Name},
+                    durability = {weapon1.Durability},
+                    minDamage = {weapon1.MinDamage},
+                    maxDamage = {weapon1.MaxDamage},
+                   """);
 
