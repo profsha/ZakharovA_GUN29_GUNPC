@@ -3,8 +3,7 @@ namespace NetologyCSharp;
 public class Weapon
 {
     public string Name { get; }
-    public int MaxDamage { get; private set; }
-    public int MinDamage { get; private set; }
+    public Interval Damage { get; private set; }
     public float Durability { get; }
 
     public Weapon(string name)
@@ -32,12 +31,16 @@ public class Weapon
             Console.WriteLine("minDamage must be greater than 0");
         }
 
-        MinDamage = minDamage;
-        MaxDamage = maxDamage <= 1 ? 10 : maxDamage;
+        Damage = new Interval(minDamage, maxDamage <= 1 ? 10 : maxDamage);
     }
 
     public float GetDamage()
     {
-        return (MinDamage + MaxDamage) / 2f;
+        return (Damage.Get) / 2f;
+    }
+    
+    public override string ToString()
+    {
+        return $"Name: {Name}, Damage: {Damage}, Durability: {Durability}";
     }
 }

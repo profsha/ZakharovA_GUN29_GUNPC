@@ -5,14 +5,23 @@ public class Unit
     private float _health;
     public string Name {get;}
     public float Health => _health;
-    public int Damage {get;}
+    public Interval Damage {get;}
     public float Armor { get; }
+
+    public Unit(string name, int minDamage, int maxDamage) : this(name)
+    {
+        if (minDamage < 0)
+        {
+            Console.WriteLine("Min damage is negative");
+            minDamage = 0;
+        }
+        Damage = new Interval(minDamage, maxDamage);
+    }
 
     public Unit(string name)
     {
         Name = name;
         _health = 100;
-        Damage = 5;
         Armor = 0.6f;
     }
 
@@ -29,6 +38,11 @@ public class Unit
     {
         _health = Health - value * Armor;
         return _health <= 0f;
+    }
+
+    public override string ToString()
+    {
+        return $"Name: {Name}, Health: {Health}, Damage: {Damage}, Armor: {Armor}";
     }
 
 }
