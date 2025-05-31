@@ -4,15 +4,10 @@ public struct Interval
 {
     public int Min { get; set; }
     public int Max { get; set; }
+    
+    private Random _rand = new Random(DateTime.Now.Millisecond);
 
-    public int Get
-    {
-        get
-        {
-            var rand = new Random();
-            return rand.Next(Min, Max);
-        }
-    }
+    public int Get => _rand.Next(Min, Max);
 
     public Interval(int min, int max)
     {

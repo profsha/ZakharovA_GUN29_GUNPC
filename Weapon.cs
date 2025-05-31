@@ -11,32 +11,29 @@ public class Weapon
         Name = name;
         Durability = 1f;
     }
-
-    public Weapon(string name, int minDamage, int maxDamage) : this(name)
+    
+    public Weapon(string name, Interval damage) : this(name)
     {
-        SetDamageParams(minDamage, maxDamage);
+        SetDamageParams(damage);
     }
 
+    public Weapon(string name, int minDamage, int maxDamage) : this(name, new Interval(minDamage, maxDamage))
+    {
+    }
+
+    public void SetDamageParams(Interval damage)
+    {
+        Damage = damage;
+    }
+    
     public void SetDamageParams(int minDamage, int maxDamage)
     {
-        if (minDamage > maxDamage)
-        {
-            Console.WriteLine("minDamage must be less than maxDamage");
-            (minDamage, maxDamage) = (maxDamage, minDamage);
-        }
-
-        if (minDamage < 1)
-        {
-            minDamage = 1;
-            Console.WriteLine("minDamage must be greater than 0");
-        }
-
-        Damage = new Interval(minDamage, maxDamage <= 1 ? 10 : maxDamage);
+        SetDamageParams(new Interval(minDamage, maxDamage));
     }
 
     public float GetDamage()
     {
-        return (Damage.Get) / 2f;
+        return Damage.Get;
     }
     
     public override string ToString()

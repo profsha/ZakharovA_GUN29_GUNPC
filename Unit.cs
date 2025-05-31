@@ -8,14 +8,12 @@ public class Unit
     public Interval Damage {get;}
     public float Armor { get; }
 
-    public Unit(string name, int minDamage, int maxDamage) : this(name)
+    public Unit(string name, int minDamage, int maxDamage) : this(name, new Interval(minDamage, maxDamage))
     {
-        if (minDamage < 0)
-        {
-            Console.WriteLine("Min damage is negative");
-            minDamage = 0;
-        }
-        Damage = new Interval(minDamage, maxDamage);
+    }
+    
+    public Unit(string name, Interval damage) : this(name)
+    {
     }
 
     public Unit(string name)
