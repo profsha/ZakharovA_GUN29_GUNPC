@@ -1,36 +1,27 @@
-﻿// See https://aka.ms/new-console-template for more information
-var availableOperators = new [] {"&", "|", "^"};
-Console.WriteLine("Введите первое число");
-if (int.TryParse(Console.ReadLine(), out int a))
-{
-    Console.WriteLine("Введите второе число");
-    if (int.TryParse(Console.ReadLine(), out int b))
-    {
-        Console.WriteLine("Введите оператор & | или ^");
-        var currentOperator = Console.ReadLine();
-        if (availableOperators.Any(x => currentOperator == x.Trim()))
-        {
-            int result;
-            switch (currentOperator)
-            {
-                case "&":
-                    result =  a&b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "|":
-                    result =  a|b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "^":
-                    result =  a^b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-            }
+﻿using NetologyCSharp;
 
-            return;
+string? input = null;
+do
+{
+    Console.WriteLine("Введите номер задания 1, 2 или 3, или exit для выхода");
+    input = Console.ReadLine();
+    if (int.TryParse(input, out int a))
+    {
+        switch (a)
+        {
+            case 1:
+                var firstTask = new ListTask();
+                firstTask.TaskLoop();
+                break;
+            case 2:
+                var secondTask = new DictTask();
+                secondTask.TaskLoop();
+                break;
+            case 3:
+                var thirdTask = new LinkedListTask();
+                thirdTask.TaskLoop();
+                break;
         }
     }
-}
-
-Console.WriteLine("Error!"); // Ваш текст
+} while (input != "exit");
 
