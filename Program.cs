@@ -1,36 +1,55 @@
-﻿// See https://aka.ms/new-console-template for more information
-var availableOperators = new [] {"&", "|", "^"};
-Console.WriteLine("Введите первое число");
-if (int.TryParse(Console.ReadLine(), out int a))
-{
-    Console.WriteLine("Введите второе число");
-    if (int.TryParse(Console.ReadLine(), out int b))
-    {
-        Console.WriteLine("Введите оператор & | или ^");
-        var currentOperator = Console.ReadLine();
-        if (availableOperators.Any(x => currentOperator == x.Trim()))
-        {
-            int result;
-            switch (currentOperator)
-            {
-                case "&":
-                    result =  a&b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "|":
-                    result =  a|b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-                case "^":
-                    result =  a^b;
-                    Console.WriteLine($"Результат: {result:D} {result:B} {result:X}");
-                    break;
-            }
+﻿
+using System.Text;
+using System.Text.RegularExpressions;
 
-            return;
-        }
-    }
+Console.WriteLine(ConcatenateStrings("hello ", "world"));
+
+Console.WriteLine(GreetUser("NameUser", 14));
+
+Console.WriteLine(InfoString("Test String"));
+
+Console.WriteLine(FiveCharacters("qwertyasdfg"));
+
+Console.WriteLine(ConcatenateArrayStrings(["First", "Second", "Third", "Fourth", "Fifth"]));
+
+Console.WriteLine(ReplaceWords("Orange, Banana, Orange, Apple", "Orange", "Lime"));
+
+string ConcatenateStrings(string str1, string str2)
+{
+    return str1 + str2;
 }
 
-Console.WriteLine("Error!"); // Ваш текст
+string GreetUser(string name, int age)
+{
+    return $"Hello, {name}!\nYou are {age} years old.";
+}
+
+string InfoString(string str)
+{
+    return $"{str.Length} characters long.\n{str.ToUpper()}\n{str.ToLower()}";
+}
+
+string FiveCharacters(string str)
+{
+    return str.Substring(0, 5);
+}
+
+StringBuilder ConcatenateArrayStrings(string[] strs)
+{
+    var result = new StringBuilder();
+
+    foreach (var str in strs)
+    {
+        result.Append(str + " ");
+    }
+    
+    return result;
+}
+
+string ReplaceWords(string inputString, string wordToReplace, string replacementWord)
+{
+    Regex regex = new Regex(wordToReplace);
+    string result = regex.Replace(inputString, replacementWord);
+    return result;
+}
 
